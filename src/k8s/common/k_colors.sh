@@ -85,3 +85,5 @@ ICON_ARROW="[→]"
 ICON_CHECK="[✓]"
 ICON_FAIL="[x]"
 ICON_NEW="[✔]"
+
+# Extended 256-color support

@@ -1,0 +1,7 @@
+#!/usr/bin/bash
+
+OK_FILE=""
+NOK_FILE=""
+TMP_ALL_PODS=""
+TMP_NODE_REPORT=""
+TMP_NODE_COUNTS=""

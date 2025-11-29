@@ -235,3 +235,4 @@ calculate_time_and_end() {
         sleep 1
     done
 }
+# Improved error handling

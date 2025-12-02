@@ -293,3 +293,5 @@ select_resource_name() {
 }
 
 
+
+# Added StatefulSet support

@@ -41,3 +41,4 @@ list_namespace_labels() {
         kubectl get ns "$namespace" --show-labels
     fi
 }
+# Cache namespace list

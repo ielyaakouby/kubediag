@@ -42,3 +42,5 @@ cluster::check_connectivity() {
     fi
 }
 
+
+# Check API server health

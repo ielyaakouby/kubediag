@@ -33,3 +33,5 @@ get_nodes_list_sort_by_age() {
     }' | sort -k6,6n | awk '{$NF=""; print $0}' | column -t
 
 }
+
+# Display node taints

@@ -113,3 +113,5 @@ display_configmap_content() {
         echo -e "${COLOR_RED}No key selected.${COLOR_RESET}"
     fi
 }
+
+# JSON output support

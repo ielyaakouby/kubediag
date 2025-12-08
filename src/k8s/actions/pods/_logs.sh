@@ -125,3 +125,4 @@ get_logs_with_error_filtering() {
         *) echo "[x] No valid option selected." ;;
     esac
 }
+# Follow logs option

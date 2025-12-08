@@ -38,3 +38,5 @@ get_pods_corresponding_service() {
         echo -e "${GREEN}Found service:${RESET} ${service} -> ${service_url}"
     done
 }
+
+# DNS resolution check

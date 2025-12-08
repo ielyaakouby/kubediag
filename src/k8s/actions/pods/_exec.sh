@@ -67,3 +67,5 @@ kube_connect_to_pod() {
         -- bash -c "kubectl exec -it -n \"$ns\" \"$pod\" -- $shell_cmd; echo -e '\n${YELLOW}Session closed. Press ENTER to exit.${RESET}'; read"
 }
 
+
+# Multi-container support

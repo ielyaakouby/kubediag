@@ -151,3 +151,5 @@ kubectl_describe_any() {
     open_with_editor "$file"
 }
 
+
+# Event filtering

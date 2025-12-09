@@ -208,3 +208,4 @@ k8s_get_matching_secrets_display_help() {
     echo " example: ${FUNCNAME[0]} \"logging\" \"match kubernetes\""
     exit 1
 }
+# Secret masking

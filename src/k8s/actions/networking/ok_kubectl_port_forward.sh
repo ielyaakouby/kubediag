@@ -133,3 +133,4 @@ get_node_events() {
             ;;
     esac
 }
+# Background mode

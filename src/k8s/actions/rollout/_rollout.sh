@@ -282,3 +282,5 @@ kube_rollout_history() {
     fi
 }
 
+
+# Rollout history display

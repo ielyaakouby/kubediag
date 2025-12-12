@@ -332,3 +332,5 @@ kube_top_nodes() {
         eval "$cmd" | column -t
     fi
 }
+
+# CPU/Memory threshold alerts

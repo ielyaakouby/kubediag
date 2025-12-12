@@ -84,3 +84,5 @@ monitor_node_allocated_resources() {
     done
 }
 
+
+# Percentage display

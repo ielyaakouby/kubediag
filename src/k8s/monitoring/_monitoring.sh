@@ -119,3 +119,4 @@ node_status_conditions_overview() {
         sleep 10
     done
 }
+# Refresh interval config

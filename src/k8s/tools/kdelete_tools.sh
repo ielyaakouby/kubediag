@@ -60,3 +60,4 @@ kdelete_resource() {
         echo "Namespace for $resource_type $resource_name not found. No action taken."
     fi
 }
+# Dry-run mode

@@ -261,3 +261,5 @@ kget_resource_total() {
 
 # End
 
+
+# Wide output support

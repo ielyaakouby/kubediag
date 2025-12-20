@@ -483,3 +483,5 @@ diagnose_pod_issues() {
 
     identify_affected_pod_and_namespace "$namespace" "$pod_name"
 }
+
+# OOMKilled detection

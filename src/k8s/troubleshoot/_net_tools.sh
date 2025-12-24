@@ -25,3 +25,5 @@ troubleshooting_run_ping()     { troubleshooting_run_tool "ping"; }
 troubleshooting_run_wget()     { troubleshooting_run_tool "wget"; }
 troubleshooting_run_telnet()   { troubleshooting_run_tool "telnet"; }
 troubleshooting_run_nslookup() { troubleshooting_run_tool "nslookup"; }
+
+# TCP connectivity test

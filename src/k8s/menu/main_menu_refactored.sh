@@ -488,3 +488,5 @@ Rellout_resource() {
     kube_restart_resource "$@"
 }
 
+
+# Keyboard shortcuts

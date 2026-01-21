@@ -173,3 +173,5 @@ menu::show_menu_simple() {
     echo "$selected"
 }
 
+
+# Responsive layout

@@ -218,3 +218,5 @@ if [[ "${1:-}" == "ok" ]]; then
 else
     kubediag::run_main
 fi
+
+# Version flag support

@@ -18,3 +18,5 @@ if [[ ":$PATH:" != *":$BIN_DIR:"* ]]; then
 fi
 
 echo "[✓] kubediag installed successfully. Run 'kubediag' to get started."
+
+# Verify checksum

@@ -274,3 +274,5 @@ MIT — see [LICENSE](../LICENSE) for details.
 ## 🙏 Acknowledgments
 
 [Kubernetes](https://kubernetes.io/) · [fzf](https://github.com/junegunen/fzf) · [jq](https://stedolan.github.io/jq/)
+
+<!-- Contributing guidelines -->

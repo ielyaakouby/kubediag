@@ -36,3 +36,4 @@ print_full_line() {
     local char="${1:-*}"  # Default character is '*'
     printf '%*s\n' "$(tput cols)" '' | tr ' ' "$char"
 }
+# Improved frame rendering

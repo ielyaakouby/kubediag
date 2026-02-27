@@ -7,7 +7,7 @@ define_colors() {
         "\033[1;32m" "\033[1;33m" "\033[1;36m" "\033[1;33m"
         "\033[1;31m"
     )
-    reset="\033[0m"  # Reset color
+    reset="\033[0m"
 }
 
 frame_message() {
@@ -17,7 +17,6 @@ frame_message() {
     echo -e "${color}${message}${RESET}"
 }
 
-# Helper function to create temporary files and register them for cleanup
 create_temp_file() {
     local suffix="${1:-}"
     local tmp_file
@@ -28,7 +27,6 @@ create_temp_file() {
         tmp_file=$(mktemp)
     fi
     
-    # Register the file for cleanup if register_temp_file function exists
     if command -v register_temp_file &>/dev/null; then
         register_temp_file "$tmp_file"
     fi
@@ -100,8 +98,6 @@ select_resource_() {
     local ns="$2"
     kubectl -n "$ns" get "$type" --no-headers | awk '{print $1}' | fzf --prompt="Select $type: "
 }
-#
-#
 
 select_resource() {
     local resource_type="$1"
@@ -131,7 +127,6 @@ select_namespace() {
     echo "$selected_namespace"
 }
 
-# Helper function to check if pod is running before getting logs
 check_pod_status_for_logs() {
     local pod="$1"
     local namespace="$2"
@@ -157,7 +152,33 @@ select_resource_type() {
     echo "$resource_type"
 }
 
+spinner() {
+    local message="$1"
+    local command="$2"
+    local delay=0.1
+    local spin='⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏'
+    local i=0
 
+    eval "$command" &
+    local pid=$!
+
+    while kill -0 "$pid" 2>/dev/null; do
+        i=$(( (i + 1) % ${#spin} ))
+        printf "\r%s %s..." "${spin:$i:1}" "$message" >&2
+        sleep "$delay"
+    done
+
+    wait "$pid"
+    local exit_code=$?
+
+    if [[ $exit_code -eq 0 ]]; then
+        printf "\r\033[1;36m[✔] %s\033[0m\n" "$message" >&2
+    else
+        printf "\r\033[1;31m[✖] %s... failed\033[0m\n" "$message" >&2
+    fi
+
+    return "$exit_code"
+}
 
 check_snipp() {
     local message="$1"
@@ -235,4 +256,3 @@ calculate_time_and_end() {
         sleep 1
     done
 }
-# Improved error handling

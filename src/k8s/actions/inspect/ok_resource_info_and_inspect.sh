@@ -180,7 +180,6 @@ list_namespace_labels() {
 show_yaml_resource() {
     local resource_type
     resource_type=$(kubectl api-resources --verbs=list --namespaced -o name | sort | fzf --prompt="Select Resource Type ❯ ") || return
-    resource_type=$(kubectl api-resources --verbs=list --namespaced -o name | sort | fzf --prompt="Select Resource Type ❯ ") || return
 
     frame_message "$CYAN" "Select Namespace"
     local NAMESPACE
@@ -230,36 +229,23 @@ show_yaml_resource() {
 }
 
 kube_show_api_resources() {
+    local scope
+    scope=$(printf "Namespaced only\nNon-namespaced only\nAll resources" | fzf --prompt="📘 Filter by scope ❯ ") || return
 
-    echo -e "\n${CYAN}========== 📘 Available Kubernetes API Resources ==========${RESET}"
+    local filter
+    read -rp "🔍 Text filter (or Enter to skip): " filter
 
-    echo -e "\nDo you want to filter by scope?"
-    echo "1) Namespaced only"
-    echo "2) Non-namespaced only"
-    echo "3) All resources"
-    read -rp "Choose [1-3]: " scope_choice
-
-    read -rp "🔍 Enter an optional text filter (kind, name, group...) or press Enter: " filter
-
-    echo -e "\n${YELLOW}→ Fetching API resources...${RESET}"
-
-    case "$scope_choice" in
-        1)
-            [[ -n "$filter" ]] \
-                && kubectl api-resources --namespaced=true | grep -i "$filter" | column -t \
-                || kubectl api-resources --namespaced=true | column -t
-            ;;
-        2)
-            [[ -n "$filter" ]] \
-                && kubectl api-resources --namespaced=false | grep -i "$filter" | column -t \
-                || kubectl api-resources --namespaced=false | column -t
-            ;;
-        3|*)
-            [[ -n "$filter" ]] \
-                && kubectl api-resources | grep -i "$filter" | column -t \
-                || kubectl api-resources | column -t
-            ;;
+    local cmd="kubectl api-resources"
+    case "$scope" in
+        "Namespaced only")     cmd+=" --namespaced=true" ;;
+        "Non-namespaced only") cmd+=" --namespaced=false" ;;
     esac
+
+    if [[ -n "$filter" ]]; then
+        eval "$cmd" | grep -i "$filter" | column -t
+    else
+        eval "$cmd" | column -t
+    fi
 }
 
 get_pod_logs() {

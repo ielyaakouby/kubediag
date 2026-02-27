@@ -32,8 +32,8 @@ error() { echo -e "${RED}❌ $*${NC}"; }
 warn() { echo -e "${YELLOW} $*${NC}"; }
 
 # Spinner basic
-spinner() {
-  local pid=$!
+_monitor_spinner() {
+  local pid=${!:-0}
   local delay=0.1
   local i=0
   local message="$1"
@@ -53,7 +53,7 @@ spinner() {
 # Fetch all running pods once
 fetch_all_pods() {
   TMP_ALL_PODS=$(mktemp)
-  (kubectl get pods --all-namespaces --field-selector=status.phase=Running -o wide --no-headers > "$TMP_ALL_PODS") & spinner "Fetching Running pods..."
+  (kubectl get pods --all-namespaces --field-selector=status.phase=Running -o wide --no-headers > "$TMP_ALL_PODS") & _monitor_spinner "Fetching Running pods..."
 
   if [[ ! -s "$TMP_ALL_PODS" ]]; then
     error "Failed to fetch pods or no running pods found."
@@ -64,10 +64,10 @@ fetch_all_pods() {
 # Select nodes
 select_nodes() {
   info "Listing Kubernetes nodes..."
-  local tmp_nodes
+  local tmp_nodes=""
   tmp_nodes=$(mktemp)
 
-  (kubectl get nodes --no-headers -o custom-columns=NAME:.metadata.name > "$tmp_nodes") & spinner "Fetching nodes list..."
+  (kubectl get nodes --no-headers -o custom-columns=NAME:.metadata.name > "$tmp_nodes") & _monitor_spinner "Fetching nodes list..."
 
   if [[ ! -s "$tmp_nodes" ]]; then
     error "No nodes found or failed to fetch nodes."
@@ -133,7 +133,7 @@ analyze_pods() {
 
       ((current_node++))
     done
-  ) & spinner "Analyzing pods on selected nodes..."
+  ) & _monitor_spinner "Analyzing pods on selected nodes..."
 
   # Affichage après spinner
   cat "$TMP_NODE_REPORT"
@@ -174,7 +174,7 @@ display_details() {
     local header_color="$3"
     local section="$4"
     local indent="    "
-    local tmpfile
+    local tmpfile=""
     tmpfile=$(mktemp)
 
     {
@@ -274,7 +274,7 @@ count_pods_per_node() {
             echo "$node $count" >> "$TMP_NODE_COUNTS"
           fi
         done
-  ) & spinner "Counting pods in all nodes..."
+  ) & _monitor_spinner "Counting pods in all nodes..."
 
   if [[ ! -s "$TMP_NODE_COUNTS" ]]; then
     error "Failed to count pods or no pods running."

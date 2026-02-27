@@ -132,7 +132,7 @@ resource_info_and_inspect() {
             "↑ Go Home"
         )
         local choice
-        choice=$(printf "%s\n" "${options[@]}" | fzf --prompt="Main Menu ❯ " --border=rounded --no-mouse --border-label="🔬 Kubediag" --height=32% --color="fg:#00FFFF,bg:#000000,hl:#00FF00,fg+:#FFFFFF,bg+:#000000,prompt:italic:green,border:blue,header:yellow") || exit 0
+        choice=$(printf "%s\n" "${options[@]}" | fzf --prompt="Main Menu ❯ " --border=rounded --no-mouse --border-label="🔬 Kubediag" --height="11" --color="fg:#00FFFF,bg:#000000,hl:#00FF00,fg+:#FFFFFF,bg+:#000000,prompt:italic:green,border:blue,header:yellow") || exit 0
 
         case "$choice" in
             *"Go Back") return 0 ;;
@@ -150,7 +150,7 @@ resource_info_and_inspect() {
         #View Pod Events
         #View Pod YAML"
 show_ingress_menu() {
-    generic_submenu "Ingress Info" \
+    generic_submenu "Ingress Info" "9" \
         "← Go Back" \
         "> List Ingresses" \
         "? Describe Ingress" \
@@ -159,16 +159,16 @@ show_ingress_menu() {
 }
 
 show_pod_menu() {
-    generic_submenu "Pod Info" \
+    generic_submenu "Pod Info" "9" \
+        "← Go Back" \
         "> List Pods" \
         "? Describe Pod" \
         "+ Get Pod Logs" \
-        "← Go Back" \
         "↑ Go Home"
 }
 
 show_config_and_secret_menu() {
-    generic_submenu "Config & Secrets" \
+    generic_submenu "Config & Secrets"c
         "← Go Back" \
         "> List ConfigMaps" \
         "> List Secrets" \
@@ -178,7 +178,7 @@ show_config_and_secret_menu() {
 }
 
 show_cluster_menu() {
-    generic_submenu "Cluster Info" \
+    generic_submenu "Cluster Info" "9" \
         "← Go Back" \
         "ℹ Cluster Info" \
         "> API Resources" \
@@ -187,7 +187,7 @@ show_cluster_menu() {
 }
 
 show_namespace_menu() {
-    generic_submenu "Namespace & Labels" \
+    generic_submenu "Namespace & Labels" "10" \
         "← Go Back" \
         "> List Namespaces" \
         "> List Namespace Labels" \
@@ -197,12 +197,14 @@ show_namespace_menu() {
 }
 
 generic_submenu() {
-    local title="$1"; shift
+    local title="$1"
+    local height="${2:-32%}"
+    shift 2
     local options=("$@")
 
     while true; do
         local choice
-        choice=$(printf "%s\n" "${options[@]}" | fzf --prompt="$title ❯ " --border=rounded --no-mouse --border-label="🔬 Kubediag" --height=32% --color="fg:#00FFFF,bg:#000000,hl:#00FF00,fg+:#FFFFFF,bg+:#000000,prompt:italic:green,border:blue,header:yellow") || return
+        choice=$(printf "%s\n" "${options[@]}" | fzf --prompt="$title ❯ " --border=rounded --no-mouse --border-label="🔬 Kubediag" --height="$height" --color="fg:#00FFFF,bg:#000000,hl:#00FF00,fg+:#FFFFFF,bg+:#000000,prompt:italic:green,border:blue,header:yellow") || return
 
         case "$choice" in
             *"List Ingresses") list_ingresses || true ;;

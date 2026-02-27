@@ -104,11 +104,11 @@ ai_analysis::analyze_pod() {
     pod_status=$(kubectl get pod "$pod_name" -n "$namespace" --no-headers | awk '{print $3}')
     
     if [[ "$pod_status" == "Running" || "$pod_status" == "Completed" || "$pod_status" == "Succeeded" ]]; then
-        echo -e "\n${YELLOW}⚠️  [WARN]  Pod '$pod_name' is in '$pod_status' state — no issues detected, skipping AI analysis.${NC}"
+        echo -e "\n${YELLOW}[WARN]  Pod '$pod_name' is in '$pod_status' state — no issues detected, skipping AI analysis.${NC}"
         return 0
     fi
 
-    echo -e "\n${BLUE}🔍 [INFO]  Gathering details for pod $namespace/$pod_name...${NC}"
+    echo -e "\n${BLUE}[INFO]  Gathering details for pod $namespace/$pod_name...${NC}"
     
     # Gather context
     local logs_output

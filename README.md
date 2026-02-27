@@ -4,7 +4,7 @@
 
 **Your Kubernetes cluster's best friend — diagnose, monitor, and manage from a single terminal.**
 
-[![Version](https://img.shields.io/badge/version-2.0-blue?style=for-the-badge)](https://github.com/ielyaakouby/kubediag)
+[![Version](https://img.shields.io/badge/version-3.0-blue?style=for-the-badge)](https://github.com/ielyaakouby/kubediag)
 [![Shell](https://img.shields.io/badge/shell-bash-4EAA25?style=for-the-badge&logo=gnubash&logoColor=white)](https://www.gnu.org/software/bash/)
 [![License](https://img.shields.io/badge/license-MIT-orange?style=for-the-badge)](LICENSE)
 [![Kubernetes](https://img.shields.io/badge/kubernetes-ready-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white)](https://kubernetes.io/)

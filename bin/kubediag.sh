@@ -219,4 +219,3 @@ else
     kubediag::run_main
 fi
 
-# Version flag support
